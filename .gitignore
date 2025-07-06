@@ -1,1 +1,36 @@
+# 아보카도 에디션 관련
+data/
+config/config.php
+*.log
 
+# PHP
+vendor/
+composer.lock
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# 환경설정
+.env
+.env.local
+
+# 백업 파일
+*.bak
+*.backup
+backup_*
+
+# 시스템 파일
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# IDE
+.vscode/settings.json
+.idea/
+*.sublime-*
+
+# 업로드 파일들
+uploads/
+cache/
