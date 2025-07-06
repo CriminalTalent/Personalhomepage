@@ -1,1 +1,30 @@
-
+{
+  "name": "Avocado Edition Development",
+  "image": "mcr.microsoft.com/devcontainers/php:1-8.2-apache-bullseye",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/mysql:1": {
+      "version": "8.0",
+      "username": "avocado",
+      "password": "password"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
+  },
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-json",
+        "felixfbecker.php-debug",
+        "xdebug.php-debug",
+        "ms-vscode.live-server"
+      ]
+    }
+  },
+  
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "forwardPorts": [80, 3306, 3000],
+  "remoteUser": "vscode"
+}
