@@ -140,7 +140,13 @@
     const fmt = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 });
 
     function parseAmount(v){
-      const n = Number(String(v).replace(/,/g,'').trim());
+      // 🔧 수정: 유니코드 마이너스/대시를 ASCII '-'로 정규화
+      // U+2212(−), U+2012(‒), U+2013(–), U+2014(—)
+      const normalized = String(v)
+        .replace(/,/g,'')
+        .replace(/[\u2212\u2012\u2013\u2014]/g, '-')
+        .trim();
+      const n = Number(normalized);
       return Number.isFinite(n) ? n : NaN;
     }
 
@@ -156,8 +162,8 @@
         return null;
       }
 
-      const final = amount * m;
-      const profit = final - amount;
+      const final = amount * m;          // 음수×음수 => 양수 정상 처리
+      const profit = final - amount;     // 정의 유지
 
       finalVal.textContent = fmt.format(final);
       profitVal.textContent = fmt.format(profit);
@@ -168,12 +174,11 @@
       return { amount, m, final, profit, ts: Date.now() };
     }
 
-    // 복사용 문구 생성
+    // 복사용 문구 생성 (그대로 유지)
     function buildCopyText(r){
       const name = (nameEl.value || '').trim();
       const header = '✵ 두근두근... 과연 점수는?';
       const who = name ? `[${name}] ` : '';
-      // 요청 형식: "배수"
       const line = `${who}금액 ${fmt.format(r.amount)} × 배수 ${r.m} = 최종 ${fmt.format(r.final)} / 순이익 ${fmt.format(r.profit)}`;
       return `${header}\n${line}`;
     }
@@ -184,7 +189,6 @@
         await navigator.clipboard.writeText(text);
         return true;
       }catch(e){
-        // 권한 문제 등으로 실패 시 대체
         alert(text);
         return false;
       }
@@ -201,7 +205,6 @@
     }
 
     function lineForHistory(r){
-      // 히스토리에는 간단 표기(이름 제외) 유지
       return { amount:r.amount, m:r.m, final:r.final, profit:r.profit, ts:r.ts };
     }
 
@@ -253,7 +256,7 @@
     calcBtn.addEventListener('click', async () => {
       const r = calc();
       if (!r) return;
-      const ok = await copyResult(r); // 정산 후 자동 복사
+      const ok = await copyResult(r);
       if (ok) {
         const old = calcBtn.textContent;
         calcBtn.textContent = '정산됨 • 자동복사 완료';
@@ -264,11 +267,9 @@
 
     resetBtn.addEventListener('click', reset);
 
-    // Enter로 바로 정산
     amountEl.addEventListener('keydown', e=>{ if (e.key === 'Enter') calcBtn.click(); });
     nameEl.addEventListener('keydown', e=>{ if (e.key === 'Enter') calcBtn.click(); });
 
-    // 수동 복사 버튼도 동일 포맷 사용
     copyBtn.addEventListener('click', async ()=>{
       const r = calc();
       if (!r) return;
