@@ -10,8 +10,8 @@
       --panel:#171c22;
       --ink:#f1e9d2;
       --ink-dim:#bfb69d;
-      --accent:#d4ba8d;   /* 골드 톤 */
-      --accent-2:#dcc7a2; /* 보조 골드 */
+      --accent:#d4ba8d;
+      --accent-2:#dcc7a2;
       --line:#2a313a;
       --danger:#b14b4b;
       --success:#3a8e5a;
@@ -27,87 +27,30 @@
       background:linear-gradient(180deg,#0c1116,#0f1419 30%,#0f1419);
       color:var(--ink);
     }
-    .wrap{
-      max-width:720px;
-      margin:0 auto;
-      padding:max(16px,env(safe-area-inset-top)) 16px calc(20px + env(safe-area-inset-bottom));
-    }
-    .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:16px;
-    }
-    .title{
-      font-weight:700;
-      font-size:20px;
-      letter-spacing:.2px;
-      margin:0 0 12px;
-      color:var(--accent-2);
-    }
+    .wrap{max-width:720px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px calc(20px + env(safe-area-inset-bottom))}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+    .title{font-weight:700;font-size:20px;letter-spacing:.2px;margin:0 0 12px;color:var(--accent-2)}
     .row{display:flex;gap:12px;flex-wrap:wrap}
     .col{flex:1 1 220px}
-    label{
-      display:block;
-      font-size:13px;
-      color:var(--ink-dim);
-      margin:0 0 6px;
-    }
+    label{display:block;font-size:13px;color:var(--ink-dim);margin:0 0 6px}
     input,select,button{
-      width:100%;
-      padding:14px 12px;
-      border-radius:var(--radius-sm);
-      border:1px solid var(--line);
-      background:#0f1318;
-      color:var(--ink);
-      font-size:16px;
-      outline:none;
+      width:100%;padding:14px 12px;border-radius:var(--radius-sm);
+      border:1px solid var(--line);background:#0f1318;color:var(--ink);font-size:16px;outline:none
     }
     input:focus,select:focus{border-color:var(--accent)}
-    .btn{
-      background:linear-gradient(180deg,var(--accent-2),var(--accent));
-      color:#0a0d11;
-      font-weight:700;
-      border:none;
-      cursor:pointer;
-    }
+    .btn{background:linear-gradient(180deg,var(--accent-2),var(--accent));color:#0a0d11;font-weight:700;border:none;cursor:pointer}
     .btn:active{transform:translateY(1px)}
-    .ghost{
-      background:#0f1318;
-      color:var(--ink);
-      border:1px solid var(--line);
-    }
-    .quick{
-      display:flex;flex-wrap:wrap;gap:8px;margin-top:8px
-    }
-    .chip{
-      padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#0f1318;color:var(--ink);
-      font-size:14px;cursor:pointer;flex:0 0 auto
-    }
-    .chip[data-negative="1"]{border-color:#3a2b2b;color:#d9b0b0}
-    .chip[data-zero="1"]{border-color:#2f3440;color:#aeb5c2}
-    .grid{
-      display:grid;gap:12px;margin-top:12px
-    }
+    .ghost{background:#0f1318;color:var(--ink);border:1px solid var(--line)}
+    .grid{display:grid;gap:12px;margin-top:12px}
     .grid.two{grid-template-columns:1fr 1fr}
-    @media (max-width:480px){
-      .grid.two{grid-template-columns:1fr}
-    }
-    .result{
-      background:#0f1318;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px
-    }
+    @media (max-width:480px){.grid.two{grid-template-columns:1fr}}
+    .result{background:#0f1318;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px}
     .result h3{margin:0 0 6px;font-size:14px;color:var(--ink-dim);font-weight:600}
     .result .val{font-size:22px;font-weight:800;letter-spacing:.2px}
-    .pos{color:var(--success)}
-    .neg{color:var(--danger)}
-    .muted{color:var(--ink-dim)}
+    .pos{color:var(--success)} .neg{color:var(--danger)} .muted{color:var(--ink-dim)}
     .toolbar{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
     .history{margin-top:18px}
-    .history-item{
-      display:flex;justify-content:space-between;gap:12px;
-      padding:12px;border-bottom:1px dashed var(--line);font-size:14px
-    }
+    .history-item{display:flex;justify-content:space-between;gap:12px;padding:12px;border-bottom:1px dashed var(--line);font-size:14px}
     .history-item:last-child{border-bottom:none}
     .mono{font-variant-numeric:tabular-nums}
     footer{margin-top:18px;color:var(--ink-dim);font-size:12px;text-align:center}
@@ -121,8 +64,12 @@
 
       <div class="row">
         <div class="col">
+          <label for="playerName">이름</label>
+          <input id="playerName" type="text" placeholder="예: 클로린드 에브게니아 휘페리온" />
+        </div>
+        <div class="col">
           <label for="amount">배팅 금액</label>
-          <!-- 음수 허용: min 제거, pattern/title 추가 -->
+          <!-- 음수 허용 -->
           <input id="amount" type="number" inputmode="decimal" placeholder="예: 10000 또는 -10000"
                  step="0.01" pattern="^-?\d*([.,]\d+)?$" title="양수/음수 금액 둘 다 입력 가능합니다." />
         </div>
@@ -142,20 +89,6 @@
             <option value="-5">-5</option>
           </select>
         </div>
-      </div>
-
-      <div class="quick" aria-label="빠른 계수 선택">
-        <button class="chip" data-m="5">×5</button>
-        <button class="chip" data-m="4">×4</button>
-        <button class="chip" data-m="3">×3</button>
-        <button class="chip" data-m="2">×2</button>
-        <button class="chip" data-m="1">×1</button>
-        <button class="chip" data-m="0" data-zero="1">0</button>
-        <button class="chip" data-m="-1" data-negative="1">-1</button>
-        <button class="chip" data-m="-2" data-negative="1">-2</button>
-        <button class="chip" data-m="-3" data-negative="1">-3</button>
-        <button class="chip" data-m="-4" data-negative="1">-4</button>
-        <button class="chip" data-m="-5" data-negative="1">-5</button>
       </div>
 
       <div class="grid two">
@@ -184,13 +117,14 @@
 
       <footer>
         정의: 최종정산 = 배팅금액 × 계수, 순이익 = 최종정산 − 배팅금액<br/>
-        빠른 사용: 금액 입력 → 계수 선택 → <span class="kbd">정산하기</span>
+        빠른 사용: 이름 입력 → 금액 입력 → 계수 선택 → <span class="kbd">정산하기</span>
       </footer>
     </div>
   </div>
 
   <script>
     const $ = s => document.querySelector(s);
+    const nameEl = $('#playerName');
     const amountEl = $('#amount');
     const multEl = $('#mult');
     const calcBtn = $('#calc');
@@ -202,17 +136,8 @@
     const clearHistBtn = $('#clearHist');
     const historyBox = $('#history');
 
-    // 포맷터: 한국 통화/숫자
+    // 포맷터: 한국 숫자
     const fmt = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 });
-
-    // 빠른 계수 버튼 동작
-    document.querySelectorAll('.chip').forEach(ch => {
-      ch.addEventListener('click', () => {
-        const m = ch.getAttribute('data-m');
-        multEl.value = m;
-        if (navigator.vibrate) navigator.vibrate(8);
-      });
-    });
 
     function parseAmount(v){
       const n = Number(String(v).replace(/,/g,'').trim());
@@ -223,7 +148,6 @@
       const amount = parseAmount(amountEl.value);
       const m = Number(multEl.value);
 
-      // (변경) 음수 허용: 유효성은 숫자인지만 확인
       if (!Number.isFinite(amount)){
         finalVal.textContent = '금액을 확인하세요';
         finalVal.className = 'val mono neg';
@@ -238,14 +162,36 @@
       finalVal.textContent = fmt.format(final);
       profitVal.textContent = fmt.format(profit);
 
-      // 표시 색상 로직은 기존 유지
       finalVal.className = 'val mono ' + (final >= amount ? 'pos' : (m===1?'muted':'neg'));
       profitVal.className = 'val mono ' + (profit > 0 ? 'pos' : (profit < 0 ? 'neg' : 'muted'));
 
       return { amount, m, final, profit, ts: Date.now() };
     }
 
+    // 복사용 문구 생성
+    function buildCopyText(r){
+      const name = (nameEl.value || '').trim();
+      const header = '✵ 두근두근... 과연 점수는?';
+      const who = name ? `[${name}] ` : '';
+      // 요청 형식: "배수"
+      const line = `${who}금액 ${fmt.format(r.amount)} × 배수 ${r.m} = 최종 ${fmt.format(r.final)} / 순이익 ${fmt.format(r.profit)}`;
+      return `${header}\n${line}`;
+    }
+
+    async function copyResult(r){
+      const text = buildCopyText(r);
+      try{
+        await navigator.clipboard.writeText(text);
+        return true;
+      }catch(e){
+        // 권한 문제 등으로 실패 시 대체
+        alert(text);
+        return false;
+      }
+    }
+
     function reset(){
+      nameEl.value = '';
       amountEl.value = '';
       multEl.value = '1';
       finalVal.textContent = '—';
@@ -254,8 +200,9 @@
       profitVal.className = 'val mono muted';
     }
 
-    function lineOf(r){
-      return `금액 ${fmt.format(r.amount)} × 계수 ${r.m} = 최종 ${fmt.format(r.final)} / 순이익 ${fmt.format(r.profit)}`;
+    function lineForHistory(r){
+      // 히스토리에는 간단 표기(이름 제외) 유지
+      return { amount:r.amount, m:r.m, final:r.final, profit:r.profit, ts:r.ts };
     }
 
     function renderHistory(){
@@ -303,36 +250,44 @@
     }
 
     // 이벤트
-    calcBtn.addEventListener('click', () => {
+    calcBtn.addEventListener('click', async () => {
       const r = calc();
-      if (r && navigator.vibrate) navigator.vibrate(12);
+      if (!r) return;
+      const ok = await copyResult(r); // 정산 후 자동 복사
+      if (ok) {
+        const old = calcBtn.textContent;
+        calcBtn.textContent = '정산됨 • 자동복사 완료';
+        setTimeout(()=>calcBtn.textContent = old, 1000);
+      }
+      if (navigator.vibrate) navigator.vibrate(12);
     });
+
     resetBtn.addEventListener('click', reset);
 
-    amountEl.addEventListener('keydown', e=>{
-      if (e.key === 'Enter') calc();
-    });
+    // Enter로 바로 정산
+    amountEl.addEventListener('keydown', e=>{ if (e.key === 'Enter') calcBtn.click(); });
+    nameEl.addEventListener('keydown', e=>{ if (e.key === 'Enter') calcBtn.click(); });
 
+    // 수동 복사 버튼도 동일 포맷 사용
     copyBtn.addEventListener('click', async ()=>{
       const r = calc();
       if (!r) return;
-      const text = lineOf(r);
-      try{
-        await navigator.clipboard.writeText(text);
+      const ok = await copyResult(r);
+      if (ok){
+        const old = copyBtn.textContent;
         copyBtn.textContent = '복사됨';
-        setTimeout(()=>copyBtn.textContent='결과 복사', 900);
-      }catch(e){
-        alert(text);
+        setTimeout(()=>copyBtn.textContent=old, 900);
       }
     });
 
     saveBtn.addEventListener('click', ()=>{
       const r = calc();
       if (!r) return;
-      saveHistoryItem(r);
+      saveHistoryItem(lineForHistory(r));
       renderHistory();
+      const old = saveBtn.textContent;
       saveBtn.textContent = '저장됨';
-      setTimeout(()=>saveBtn.textContent='히스토리에 저장', 900);
+      setTimeout(()=>saveBtn.textContent=old, 900);
     });
 
     clearHistBtn.addEventListener('click', clearHistory);
