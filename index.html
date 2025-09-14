@@ -122,7 +122,9 @@
       <div class="row">
         <div class="col">
           <label for="amount">배팅 금액</label>
-          <input id="amount" type="number" inputmode="decimal" placeholder="예: 10000" min="0" step="0.01" />
+          <!-- 음수 허용: min 제거, pattern/title 추가 -->
+          <input id="amount" type="number" inputmode="decimal" placeholder="예: 10000 또는 -10000"
+                 step="0.01" pattern="^-?\d*([.,]\d+)?$" title="양수/음수 금액 둘 다 입력 가능합니다." />
         </div>
         <div class="col">
           <label for="mult">계수</label>
@@ -208,7 +210,6 @@
       ch.addEventListener('click', () => {
         const m = ch.getAttribute('data-m');
         multEl.value = m;
-        // 진동 피드백(지원 기기)
         if (navigator.vibrate) navigator.vibrate(8);
       });
     });
@@ -221,19 +222,23 @@
     function calc(){
       const amount = parseAmount(amountEl.value);
       const m = Number(multEl.value);
-      if (!Number.isFinite(amount) || amount < 0){
+
+      // (변경) 음수 허용: 유효성은 숫자인지만 확인
+      if (!Number.isFinite(amount)){
         finalVal.textContent = '금액을 확인하세요';
         finalVal.className = 'val mono neg';
         profitVal.textContent = '—';
         profitVal.className = 'val mono muted';
         return null;
       }
+
       const final = amount * m;
       const profit = final - amount;
 
       finalVal.textContent = fmt.format(final);
       profitVal.textContent = fmt.format(profit);
 
+      // 표시 색상 로직은 기존 유지
       finalVal.className = 'val mono ' + (final >= amount ? 'pos' : (m===1?'muted':'neg'));
       profitVal.className = 'val mono ' + (profit > 0 ? 'pos' : (profit < 0 ? 'neg' : 'muted'));
 
